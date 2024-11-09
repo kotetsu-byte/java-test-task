@@ -25,9 +25,7 @@ class Aquarium {
         totalFish = new ArrayList<>(males);
         totalFish.addAll(females);
 
-        if(totalFish.size() <= fishMaxCount) {
-            this.registerInitialFishes();
-        }
+        this.registerInitialFishes();
     }
     
     public void registerInitialFishes()
@@ -47,25 +45,23 @@ class Aquarium {
     private void breedFish(Fish male, Fish female) {
         System.out.println("Fish Male " + male.getKey() + " and fish Female " + female.getKey() + " are breeding");
         int childrenNum = random.nextInt(10) + 1;
-
-        for(int i = 0; i < childrenNum; i++)
-        {
-            Fish child = new Fish();
-            boolean childGender = random.nextBoolean();
-            if(childGender == false) {
-                child = new Male(i + totalFish.size() + 1, Fish.getLifespan());
-                malesCount++;
-            } else if (childGender == true) {
-                child = new Female(i + totalFish.size() + 1, Fish.getLifespan());
-                femalesCount++;
+        if(totalFish.size() < fishMaxCount){
+            for(int i = 0; i < childrenNum; i++)
+            {
+                Fish child = new Fish();
+                boolean childGender = random.nextBoolean();
+                if(childGender == false) {
+                    child = new Male(i + totalFish.size() + 1, Fish.getLifespan());
+                    System.out.println("Child fish " + child.getGender() + " " + child.getKey() + " has been born");
+                    malesCount++;
+                } else if (childGender == true) {
+                    child = new Female(i + totalFish.size() + 1, Fish.getLifespan());
+                    System.out.println("Child fish " + child.getGender() + " " + child.getKey() + " has been born");
+                    femalesCount++;
+                }
+                totalFish.add(child);
             }
-            registerChildren(child);
         }
-    }
-
-    private void registerChildren(Fish fish)
-    {
-        System.out.println("Child fish " + fish.getGender() + " " + fish.getKey() + " has been born");
     }
 
     // getters and setters

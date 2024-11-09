@@ -15,13 +15,14 @@ public class Main {
         System.out.print("Enter max capacity of fish in the aquarium: ");
         Aquarium.setFishMaxPossibleCount(scanner.nextInt());
         System.out.println("There is " + Aquarium.getMalesCount() + " males and " + Aquarium.getFemalesCount() + " females");
-
+        
+        Aquarium obj = new Aquarium();
         while (true) {
-            Aquarium obj = new Aquarium();
             if(Aquarium.totalFish.size() >= Aquarium.getFishMaxPossibleCount())
             {
                 break;
             }
+            Aquarium obj1 = new Aquarium();
         }
     }
 }
